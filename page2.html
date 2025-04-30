@@ -272,9 +272,9 @@
             const filtered = stored.filter(item => filter === "all" || item.status === filter);
 
             const gallery = document.getElementById('gallery');
+        //   <input type="checkbox" class="select-checkbox" data-index="${index}" />
             gallery.innerHTML = filtered.map((item, index) => `
         <div class="media-card">
-          <input type="checkbox" class="select-checkbox" data-index="${index}" />
           ${item?.mimeType?.includes("image") || item?.type === "image"
                     ? `<img src="${item.objectUrl}" alt="${item.name}" />`
                     : `<video controls src="${item.objectUrl}"></video>`}
