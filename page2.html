@@ -134,12 +134,12 @@
             display: none;
         }
 
-        @media (max-width: 500px) {
+        /* @media (max-width: 500px) {
             .controls {
                 flex-direction: column;
                 align-items: stretch;
             }
-        }
+        } */
     </style>
 </head>
 
@@ -158,7 +158,7 @@
 
     <label class="fab">
         <span class="material-icons">add_a_photo</span>
-        <input type="file" accept="image/*,video/*" capture="environment" onchange="handleMediaUpload(event)" />
+        <input type="file" multiple accept="image/*,video/*" capture="environment" onchange="handleMediaUpload(event)" />
     </label>
 
     <script>
