@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Media Upload to Public Folder</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <style>
         body {
             margin: 0;
@@ -272,7 +271,7 @@
             const filtered = stored.filter(item => filter === "all" || item.status === filter);
 
             const gallery = document.getElementById('gallery');
-        //   <input type="checkbox" class="select-checkbox" data-index="${index}" />
+            //   <input type="checkbox" class="select-checkbox" data-index="${index}" />
             gallery.innerHTML = filtered.map((item, index) => `
         <div class="media-card">
           ${item?.mimeType?.includes("image") || item?.type === "image"
@@ -374,6 +373,7 @@
                 })
                 localStorage.setItem("imagesList", JSON.stringify(files))
                 console.log("🚀 ~ getFilesFromDrive ~ files:", files)
+                renderGallery();
             }).catch(function (err) {
                 console.log("🚀 ~ getFilesFromDrive ~ err:", err)
 
@@ -383,7 +383,7 @@
         function logout() {
             localStorage.clear();
             handleSignoutClick();
-            window.location.href = 'page1.html'
+            window.location.href = 'index.html'
         }
 
         renderGallery();
