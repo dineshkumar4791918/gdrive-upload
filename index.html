@@ -103,11 +103,28 @@
             display: flex;
             justify-content: center;
         }
+
+        .custom-google-btn {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            font-family: Roboto, sans-serif;
+            font-size: 14px;
+        }
+
+        .custom-google-btn img {
+            width: 18px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="">
+    <div class="" id="main-container">
         <div class="form-container">
             <h2>User Details</h2>
             <form id="userForm">
@@ -122,6 +139,15 @@
 
                 <button type="submit">Continue</button>
             </form>
+        </div>
+        <div>
+            <button
+                style="display: flex; align-items: center; padding: 10px 15px; background: white; border: 1px solid #ccc; border-radius: 4px; font-family: Roboto, sans-serif; font-size: 14px; cursor: pointer;justify-content: center; color: black;"
+                onclick="handleAuthClick()">
+                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo"
+                    style="height: 18px; margin-right: 8px;" />
+                Sign in with Google
+            </button>
         </div>
         <!-- <div class="login_button">
             <div id="g_id_onload"
