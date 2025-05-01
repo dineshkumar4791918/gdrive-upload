@@ -8,7 +8,7 @@
     <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
     <meta name="google-signin-client_id"
         content="799063261621-a63dhtij34hcic90n5s5tge168hluo5h.apps.googleusercontent.com">
-    <title>User Info Form</title>
+    <title>Websuitz - login</title>
 
     <style>
         :root {
@@ -77,7 +77,7 @@
         }
 
         button {
-            margin-top: 1.5rem;
+            /* margin-top: 1.5rem; */
             width: 100%;
             padding: 0.75rem;
             font-size: 1rem;
@@ -124,7 +124,24 @@
 </head>
 
 <body>
-    <div class="" id="main-container">
+    <div id="main-container">
+        <div class="form-container" style="text-align: center;">
+            <!-- Logo & App Name -->
+            <img src="logo.png" alt="App Logo" style="height: 60px; margin-bottom: 1rem;" />
+            <h1 style="margin-bottom: 0.5rem;">Websuitz</h1>
+            <p style="margin-bottom: 2rem; color: var(--text-color);">Secure Google Drive Upload & Preview</p>
+
+            <!-- Google Sign-In Button -->
+            <button
+                style="display: flex; align-items: center; padding: 10px 15px; background: white; border: 1px solid #ccc; border-radius: 4px; font-family: Roboto, sans-serif; font-size: 14px; cursor: pointer; justify-content: center; color: black; width: 100%;"
+                onclick="handleAuthClick()">
+                <img src="g-logo.png" alt="Google logo"
+                    style="height: 18px; margin-right: 8px;" />
+                Sign in with Google
+            </button>
+        </div>
+    </div>
+    <!-- <div class="" id="main-container">
         <div class="form-container">
             <h2>User Details</h2>
             <form id="userForm">
@@ -139,23 +156,17 @@
 
                 <button type="submit">Continue</button>
             </form>
+            <div>
+                <button
+                    style="display: flex; align-items: center; padding: 10px 15px; background: white; border: 1px solid #ccc; border-radius: 4px; font-family: Roboto, sans-serif; font-size: 14px; cursor: pointer;justify-content: center; color: black;"
+                    onclick="handleAuthClick()">
+                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo"
+                        style="height: 18px; margin-right: 8px;" />
+                    Sign in with Google
+                </button>
+            </div>
         </div>
-        <div>
-            <button
-                style="display: flex; align-items: center; padding: 10px 15px; background: white; border: 1px solid #ccc; border-radius: 4px; font-family: Roboto, sans-serif; font-size: 14px; cursor: pointer;justify-content: center; color: black;"
-                onclick="handleAuthClick()">
-                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo"
-                    style="height: 18px; margin-right: 8px;" />
-                Sign in with Google
-            </button>
-        </div>
-        <!-- <div class="login_button">
-            <div id="g_id_onload"
-                data-client_id="799063261621-a63dhtij34hcic90n5s5tge168hluo5h.apps.googleusercontent.com"
-                data-callback="handleCredentialResponse"></div>
-            <div class="g_id_signin" data-type="standard"></div>
-        </div> -->
-    </div>
+    </div> -->
     <script>
         let GoogleAuth;
         const CLIENT_ID = "799063261621-a63dhtij34hcic90n5s5tge168hluo5h.apps.googleusercontent.com"; // Replace with your OAuth Client ID
@@ -163,29 +174,29 @@
         const SCOPES = "https://www.googleapis.com/auth/drive.file";
         const FOLDER_ID = "1CR5THCIw6hnz_EkDdd3ocKcchiYHskdd"; // Replace with the public folder ID
 
-        const form = document.getElementById('userForm');
+        // const form = document.getElementById('userForm');
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            localStorage.clear();
-            const name = document.getElementById('name').value.trim();
-            const mobile = document.getElementById('mobile').value.trim();
-            const email = document.getElementById('email').value.trim();
+        // form.addEventListener('submit', function (e) {
+        //     e.preventDefault();
+        //     localStorage.clear();
+        //     const name = document.getElementById('name').value.trim();
+        //     const mobile = document.getElementById('mobile').value.trim();
+        //     const email = document.getElementById('email').value.trim();
 
-            if (name && mobile && email) {
-                let isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get()
-                if (isSignedIn) {
-                    let metaName = `${document.getElementById('name').value.trim().slice(0, 4)}_${document.getElementById('mobile').value.trim().slice(0, 4)}`
-                    findFolderIdByName(metaName);
-                    // localStorage.setItem('userInfo', JSON.stringify({ name, mobile, email }));
-                    // createDriveFolder();
-                } else {
-                    handleAuthClick();
-                }
-            } else {
-                alert("Please fill all fields correctly.");
-            }
-        });
+        //     if (name && mobile && email) {
+        //         let isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get()
+        //         if (isSignedIn) {
+        //             let metaName = `${document.getElementById('name').value.trim().slice(0, 4)}_${document.getElementById('mobile').value.trim().slice(0, 4)}`
+        //             findFolderIdByName(metaName);
+        //             // localStorage.setItem('userInfo', JSON.stringify({ name, mobile, email }));
+        //             // createDriveFolder();
+        //         } else {
+        //             handleAuthClick();
+        //         }
+        //     } else {
+        //         alert("Please fill all fields correctly.");
+        //     }
+        // });
 
         // Load the Google API client
         function handleClientLoad() {
@@ -205,7 +216,7 @@
                 scope: SCOPES
             }).then(function (authInstance) {
                 GoogleAuth = authInstance;
-                handleAuthClick()
+                // handleAuthClick()
             });
         }
 
@@ -236,14 +247,18 @@
                 GoogleAuth.signIn().then(function (data) {
                     console.log("🚀 ~ data:", data)
                     const profileData = data.getBasicProfile();
-                    document.getElementById('name').value = profileData?.getName() || '';
-                    document.getElementById('email').value = profileData?.getEmail() || '';
+                    let metaName = `${profileData?.getName()?.replace(/\s+/g, "_")}_${profileData.getId()}`
+                    findFolderIdByName(metaName);
+                    // document.getElementById('name').value = profileData?.getName() || '';
+                    // document.getElementById('email').value = profileData?.getEmail() || '';
                 });
             } else {
                 let googleUser = gapi.auth2.getAuthInstance().currentUser.get()
-                const profile = googleUser.getBasicProfile();
-                document.getElementById('name').value = profile?.getName() || '';
-                document.getElementById('email').value = profile?.getEmail() || '';
+                const profileData = googleUser.getBasicProfile();
+                let metaName = `${profileData?.getName()}_${profileData.getId()}`
+                findFolderIdByName(metaName);
+                // document.getElementById('name').value = profile?.getName() || '';
+                // document.getElementById('email').value = profile?.getEmail() || '';
             }
         }
 
@@ -257,7 +272,7 @@
                 if (files && files.length > 0) {
                     console.log('Folder ID:', files[0].id);
                     localStorage.setItem('folder_id', files[0].id);
-                    window.location.href = 'page2.html';
+                    window.location.href = 'list.html';
                     return files[0].id;
                 } else {
                     console.log('No folder found.');
@@ -290,7 +305,7 @@
             if (response.ok) {
                 console.log('Created folder:', data.id);
                 localStorage.setItem('folder_id', data.id);
-                window.location.href = 'page2.html';
+                window.location.href = 'list.html';
                 return data.id; // Return folder ID
             } else {
                 console.error('Folder creation failed:', data);
