@@ -202,6 +202,7 @@
             return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/drive/v3/rest")
                 .then(function () {
                     console.log("GAPI client loaded for API");
+                    getFilesFromDrive();
                 }, function (error) {
                     console.error("Error loading GAPI client", error);
                 });
@@ -214,7 +215,6 @@
                 scope: SCOPES
             }).then(function (authInstance) {
                 GoogleAuth = authInstance;
-                getFilesFromDrive();
             });
         }
 
