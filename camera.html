@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <title>Websuitz - Camera</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -385,8 +386,8 @@
             }
         }
 
-         // Sign in the user
-         async function handleAuthClick(event) {
+        // Sign in the user
+        async function handleAuthClick(event) {
             let isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get()
             console.log("🚀 ~ handleAuthClick ~ isSignedIn:", isSignedIn)
             if (!isSignedIn) {
@@ -402,7 +403,7 @@
                 let googleUser = gapi.auth2.getAuthInstance().currentUser.get()
                 const profileData = googleUser.getBasicProfile();
                 let metaName = `${profileData?.getName()}_${profileData.getId()}`
-                    findFolderIdByName(metaName);
+                findFolderIdByName(metaName);
                 // document.getElementById('name').value = profile?.getName() || '';
                 // document.getElementById('email').value = profile?.getEmail() || '';
             }
