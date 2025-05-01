@@ -223,10 +223,25 @@
 
             try {
                 mediaStream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: currentFacing },
+                    video: {
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 },
+                        facingMode: currentFacing
+                    },
                     audio: true
                 });
                 camera.srcObject = mediaStream;
+                // Try to enable continuous autofocus if supported
+                const [track] = mediaStream.getVideoTracks();
+                const capabilities = track.getCapabilities();
+
+                if (capabilities.focusMode && capabilities.focusMode.includes("continuous")) {
+                    await track.applyConstraints({
+                        advanced: [{ focusMode: "continuous" }]
+                    });
+                    console.log("Continuous autofocus applied");
+                }
+                camera.play();
                 // applyFlashSetting();
             } catch (err) {
                 alert("Camera access error: " + err.message);
